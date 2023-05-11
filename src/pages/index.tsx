@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Next Twitter</title>
+        <title>Next - Twitter</title>
         <meta name="Next Twitter" content="A Next JS Twitter Clone" />
         <meta
           name="google-site-verification"
