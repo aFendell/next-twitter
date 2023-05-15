@@ -2,7 +2,7 @@ import Image from "next/image";
 import { VscAccount } from "react-icons/vsc";
 
 type Props = {
-  src?: string | null;
+  src: string | null | undefined;
   className?: string;
 };
 

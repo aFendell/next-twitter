@@ -15,7 +15,7 @@ const TweetCard = ({
   likedByme,
 }: Tweet) => {
   return (
-    <li className="flex gap-4 border-b p-4 ">
+    <li className="flex gap-4 border-b p-4">
       <Link href={`/profiles/${user.id}`}>
         <ProfileImage src={user.image} />
       </Link>

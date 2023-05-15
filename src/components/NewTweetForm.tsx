@@ -1,12 +1,14 @@
 import { type FormEvent, useState } from "react";
 import Button from "./UI/Button";
 import ProfileImage from "./ProfileImage";
-import { useSession } from "next-auth/react";
 import ResizableTextArea from "./UI/ResizableTextArea";
 import { api } from "~/utils/api";
 
-const NewTweetForm = () => {
-  const session = useSession();
+type Props = {
+  profileImageSrc: string | null | undefined;
+};
+
+const NewTweetForm = ({ profileImageSrc }: Props) => {
   const [inputValue, setInputValue] = useState("");
 
   const ctx = api.useContext();
@@ -16,8 +18,6 @@ const NewTweetForm = () => {
       void ctx.tweets.getAll.invalidate();
     },
   });
-
-  if (session.status !== "authenticated") return null;
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const NewTweetForm = () => {
       action=""
     >
       <div className="flex gap-4">
-        <ProfileImage src={session.data.user.image} />
+        <ProfileImage src={profileImageSrc} />
         <ResizableTextArea
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
