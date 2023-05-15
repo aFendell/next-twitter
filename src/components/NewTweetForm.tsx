@@ -13,7 +13,7 @@ const NewTweetForm = () => {
   const createTweet = api.tweets.create.useMutation({
     onSuccess: () => {
       setInputValue("");
-      ctx.tweets.getAll.invalidate();
+      void ctx.tweets.getAll.invalidate();
     },
   });
 

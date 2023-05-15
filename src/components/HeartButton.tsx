@@ -16,7 +16,7 @@ const HeartButton = ({ likedByMe, likeCount, id }: HeartButtonProps) => {
   const ctx = api.useContext();
   const { mutate: toggleLike, isLoading } = api.tweets.toggleLike.useMutation({
     onSuccess: () => {
-      ctx.tweets.getAll.invalidate();
+      void ctx.tweets.getAll.invalidate();
     },
   });
 

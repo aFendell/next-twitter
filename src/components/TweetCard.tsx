@@ -1,4 +1,4 @@
-import { RouterOutputs } from "~/utils/api";
+import type { RouterOutputs } from "~/utils/api";
 import ProfileImage from "./ProfileImage";
 import Link from "next/link";
 import { formatTimeSince } from "~/utils/dates";
