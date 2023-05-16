@@ -5,23 +5,23 @@ import FollowingTweets from "~/components/FollowingTweets";
 import Header from "~/components/Header";
 import NewTweetForm from "~/components/NewTweetForm";
 import RecentTweets from "~/components/RecentTweets";
-import Tabs, { type Tab } from "~/components/UI/Tabs";
+import Tabs from "~/components/UI/Tabs";
 
-const tabs: Tab[] = [
+const tabs = [
   {
-    id: 0,
-    label: "Recent",
+    value: "Recent",
   },
   {
-    id: 1,
-    label: "Following",
+    value: "Following",
   },
-];
+] as const;
 
 const Home: NextPage = () => {
   const session = useSession();
 
-  const [selectedTab, setSelectedTab] = useState<Tab["id"]>(0);
+  const [selectedTab, setSelectedTab] = useState<(typeof tabs)[number]>(
+    tabs[0]
+  );
 
   return (
     <>
@@ -31,13 +31,13 @@ const Home: NextPage = () => {
             <Tabs
               selectedTab={selectedTab}
               tabs={tabs}
-              onChange={setSelectedTab}
+              onSelect={setSelectedTab}
             />
             <NewTweetForm profileImageSrc={session.data.user?.image} />
           </>
         )}
       </Header>
-      {selectedTab === 0 ? <RecentTweets /> : <FollowingTweets />}
+      {selectedTab.value === "Recent" ? <RecentTweets /> : <FollowingTweets />}
     </>
   );
 };
