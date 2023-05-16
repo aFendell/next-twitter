@@ -2,13 +2,13 @@ export type TabOption = {
   value: string;
 };
 
-type Props<T extends ReadonlyArray<TabOption>> = {
-  tabs: T;
-  selectedTab: T[number];
-  onSelect: (arg: T[number]) => void;
+type Props<T extends TabOption> = {
+  tabs: ReadonlyArray<T>;
+  selectedTab: T;
+  onSelect: (arg: T) => void;
 };
 
-const Tabs = <T extends ReadonlyArray<TabOption>>({
+const Tabs = <T extends TabOption>({
   tabs,
   selectedTab,
   onSelect,
