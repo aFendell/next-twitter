@@ -4,5 +4,5 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 export const formatTimeSince = (createdAt: Date) => {
-  return dayjs(createdAt).fromNow();
+  return dayjs(createdAt).fromNow(true);
 };

@@ -2,9 +2,9 @@ import type { RouterOutputs } from "~/utils/api";
 import ProfileImage from "./ProfileImage";
 import Link from "next/link";
 import { formatTimeSince } from "~/utils/dates";
-import HeartButton from "./HeartButton";
+import LikeButton from "./LikeButton";
 
-type Tweet = RouterOutputs["tweets"]["getAll"]["tweets"][number];
+type Tweet = RouterOutputs["tweets"]["getAllTweets"]["tweets"][number];
 
 const TweetCard = ({
   id,
@@ -27,11 +27,11 @@ const TweetCard = ({
           >
             {user.name}
           </Link>
-          <span className="text-gray-500">-</span>
+          <span className="text-gray-500">·</span>
           <span className="text-gray-500">{formatTimeSince(createdAt)}</span>
         </div>
         <p className="whitespace-pre-wrap">{content}</p>
-        <HeartButton id={id} likedByMe={likedByme} likeCount={likeCount} />
+        <LikeButton id={id} likedByMe={likedByme} likeCount={likeCount} />
       </div>
     </li>
   );

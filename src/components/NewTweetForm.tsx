@@ -15,7 +15,7 @@ const NewTweetForm = ({ profileImageSrc }: Props) => {
   const createTweet = api.tweets.create.useMutation({
     onSuccess: () => {
       setInputValue("");
-      void ctx.tweets.getAll.invalidate();
+      void ctx.tweets.getAllTweets.invalidate();
     },
   });
 

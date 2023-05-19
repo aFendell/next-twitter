@@ -1,6 +1,6 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import IconHoverEffect from "./UI/IconHoverEffect";
+import IconHoverEffect from "../UI/IconHoverEffect";
 import { VscAccount, VscHome, VscSignIn, VscSignOut } from "react-icons/vsc";
 
 const SideNav = () => {

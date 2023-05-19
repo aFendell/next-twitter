@@ -17,11 +17,11 @@ const Tabs = <T extends TabOption>({
     <div>
       <ul className="flex">
         {tabs.map((tab) => (
-          <li className="flex-grow" key={tab.value}>
+          <li className="flex flex-grow justify-center" key={tab.value}>
             <button
-              className={`w-full p-2 hover:bg-gray-200 focus-visible:bg-gray-200 ${
+              className={`p-2 hover:bg-gray-200 focus-visible:bg-white ${
                 tab.value === selectedTab.value
-                  ? "border-b-4 border-b-blue-500 font-bold"
+                  ? "border-b-4 border-b-blue-500 bg-white font-bold"
                   : ""
               }`}
               onClick={() => onSelect(tab)}

@@ -3,20 +3,21 @@ import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import IconHoverEffect from "./UI/IconHoverEffect";
 import { api } from "~/utils/api";
 
-type HeartButtonProps = {
+type LikeButtonProps = {
   likedByMe: boolean;
   likeCount: number;
   id: string;
 };
 
-const HeartButton = ({ likedByMe, likeCount, id }: HeartButtonProps) => {
+const LikeButton = ({ likedByMe, likeCount, id }: LikeButtonProps) => {
   const session = useSession();
   const HeartIcon = likedByMe ? VscHeartFilled : VscHeart;
 
   const ctx = api.useContext();
   const { mutate: toggleLike, isLoading } = api.tweets.toggleLike.useMutation({
     onSuccess: () => {
-      void ctx.tweets.getAll.invalidate();
+      void ctx.tweets.getAllTweets.invalidate();
+      void ctx.tweets.getProfileTweets.invalidate();
     },
   });
 
@@ -60,4 +61,4 @@ const HeartButton = ({ likedByMe, likeCount, id }: HeartButtonProps) => {
   );
 };
 
-export default HeartButton;
+export default LikeButton;
