@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { VscArrowLeft, VscTwitter } from "react-icons/vsc";
-import IconHoverEffect from "../UI/IconHoverEffect";
 import { useRouter } from "next/router";
+import IconHoverEffect from "../UI/IconHoverEffect";
 
 const Header = () => {
   const router = useRouter();
