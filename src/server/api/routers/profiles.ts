@@ -1,4 +1,8 @@
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 import { z } from "zod";
 
 export const profilesRouter = createTRPCRouter({
@@ -28,5 +32,29 @@ export const profilesRouter = createTRPCRouter({
         tweetsCount: profile._count.tweets,
         isFollowing: profile.followers.length > 0,
       };
+    }),
+
+  toggleFollow: protectedProcedure
+    .input(z.object({ profileId: z.string() }))
+    .mutation(async ({ input: { profileId }, ctx }) => {
+      const currentUserId = ctx.session.user.id;
+
+      const existingFollow = await ctx.prisma.user.findFirst({
+        where: { id: profileId, followers: { some: { id: currentUserId } } },
+      });
+
+      if (!existingFollow) {
+        await ctx.prisma.user.update({
+          where: { id: profileId },
+          data: { followers: { connect: { id: currentUserId } } },
+        });
+        return { addedFollow: true };
+      } else {
+        await ctx.prisma.user.update({
+          where: { id: profileId },
+          data: { followers: { disconnect: { id: currentUserId } } },
+        });
+        return { addedFollow: false };
+      }
     }),
 });

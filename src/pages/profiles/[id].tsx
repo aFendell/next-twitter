@@ -6,16 +6,22 @@ import type {
 } from "next";
 import Head from "next/head";
 import ErrorPage from "next/error";
+import { useSession } from "next-auth/react";
+
 import ssgHelper from "~/server/api/ssgHelper";
 import { api } from "~/utils/api";
 import { getPlural } from "~/utils/strings";
+
 import ProfileImage from "~/components/ProfileImage";
 import FollowButton from "~/components/FollowButton";
 import InfiniteTweetList from "~/components/InfiniteTweetList";
+import Button from "~/components/UI/Button";
 
 const UserProfile: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   id,
 }) => {
+  const session = useSession();
+
   const { data: profile, isError: isProfileError } =
     api.profiles.getById.useQuery({ id });
 
@@ -43,15 +49,20 @@ const UserProfile: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     followsCount,
     isFollowing,
   } = profile;
+
   return (
     <>
       <Head>
-        <title>{`Next Twitter - ${name}`}</title>
+        <title>{`Next Twitter · ${name}`}</title>
       </Head>
       <div className="">
         <div className="flex items-end justify-between px-4 py-3">
           <ProfileImage size="lg" src={image} className="flex-shrink-0" />
-          <FollowButton isFollowing={isFollowing} userId={id} />
+          {session.data?.user.id === id ? (
+            <Button variant="info">Set up profile</Button>
+          ) : (
+            <FollowButton isFollowing={isFollowing} profileId={id} />
+          )}
         </div>
         <div className="px-4">
           <h1 className="text-lg font-bold">{name}</h1>

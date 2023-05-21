@@ -1,20 +1,29 @@
-import React from "react";
+import { api } from "~/utils/api";
 import Button from "./UI/Button";
 
 type Props = {
   isFollowing: boolean;
-  userId: string;
+  profileId: string;
 };
 
-const FollowButton = ({ isFollowing, userId }: Props) => {
-  const onClick = () => {
-    console.log(userId);
+const FollowButton = ({ isFollowing, profileId }: Props) => {
+  const ctx = api.useContext();
+  const { mutate: toggleFollow, isLoading } =
+    api.profiles.toggleFollow.useMutation({
+      onSuccess: () => {
+        void ctx.profiles.getById.invalidate();
+      },
+    });
+
+  const onToggle = () => {
+    toggleFollow({ profileId: profileId });
   };
 
   return (
     <Button
-      className={`${isFollowing ? "bg-white text-gray-900" : "bg-gray-900"}`}
-      onClick={onClick}
+      disabled={isLoading}
+      variant={isFollowing ? "info" : "secondary"}
+      onClick={onToggle}
     >
       {isFollowing ? "Unfollow" : "Follow"}
     </Button>
