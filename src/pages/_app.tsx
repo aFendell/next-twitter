@@ -1,12 +1,12 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
+import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
-import Head from "next/head";
-import Layout from "../components/Layout/Layout";
+import Layout from "~/components/Layout/Layout";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -23,7 +23,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Layout>
         <Component {...pageProps} />
       </Layout>

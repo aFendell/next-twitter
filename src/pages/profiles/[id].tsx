@@ -55,7 +55,7 @@ const UserProfile: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Head>
         <title>{`Next Twitter · ${name}`}</title>
       </Head>
-      <div className="">
+      <div>
         <div className="flex items-end justify-between px-4 py-3">
           <ProfileImage size="lg" src={image} className="flex-shrink-0" />
           {session.data?.user.id === id ? (
@@ -64,7 +64,7 @@ const UserProfile: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
             <FollowButton isFollowing={isFollowing} profileId={id} />
           )}
         </div>
-        <div className="px-4">
+        <div className="border-b px-4 pb-3">
           <h1 className="text-lg font-bold">{name}</h1>
           <div className="flex gap-2 text-gray-500">
             <div>
