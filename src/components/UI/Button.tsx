@@ -23,11 +23,17 @@ type Props = {
   HTMLButtonElement
 >;
 
-const Button = ({ size = "md", variant = "primary", ...props }: Props) => {
+const Button = ({
+  size = "md",
+  variant = "primary",
+  className,
+  ...props
+}: Props) => {
+  const aditionalClasses = className || "";
   return (
     <button
       className={`rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50
-       ${sizeVariants[size]} ${colorVariants[variant]}`}
+       ${sizeVariants[size]} ${colorVariants[variant]} ${aditionalClasses}`}
       {...props}
     ></button>
   );
